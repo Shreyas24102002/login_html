@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Login</title>
+  <title>Sign Up</title>
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/alphardex/aqua.css@master/dist/aqua.min.css'><link rel="stylesheet" href="./style.css">
 
 </head>
@@ -18,9 +18,45 @@
     <input type="password" name="password" id="password" placeholder=" " autocomplete="off" class="form-control-material" required />
     <label for="password">Password</label>
   </div>
-  <button type="submit" class="btn btn-primary btn-ghost">Login</button>
+  <div class="form-input-material">
+    <input type="password" name="password" id="confirm_password" placeholder=" " autocomplete="off"
+      class="form-control-material" required />
+    <label for="password">Confirm Password</label>
+  </div>
+  <button type="submit" class="btn btn-primary btn-ghost" onclick="return validateForm()">Sign Up</button>
+ 
 </form>
-<!-- partial -->
+  <script>
+  function validateForm() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    var confirm_password = document.getElementById("confirm_password").value;
+
+    if (username == "" || password == "" || confirm_password == "") {
+      alert("Please fill all fields");
+      return false;
+    } else if (password.length < 6) {
+      document.getElementById("password").value = "";
+      document.getElementById("confirm_password").value = "";
+      document.getElementById("password").focus();
+      alert("Password should be at least 6 characters long");
+      return false;
+    } else if (password != confirm_password) {
+      document.getElementById("password").value = "";
+      document.getElementById("confirm_password").value = "";
+      document.getElementById("password").focus();
+      alert("Password and Confirm Password do not match");
+      return false;
+    }
+    else if (password == confirm_password) {
+      alert(`Welcome ${username}`);
+      return true;
+    }
+
+    return true;
+  }
+</script>
+
   
 </body>
 </html>
